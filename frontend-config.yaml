@@ -1,0 +1,9 @@
+apiVersion: networking.gke.io/v1beta1
+kind: FrontendConfig
+metadata:
+  name: frontend-config-${ARGOCD_ENV_INGRESS_NAME}
+  namespace: ${ARGOCD_ENV_INGRESS_NAMESPACE}
+spec:
+  redirectToHttps:
+    enabled: true
+    responseCodeName: PERMANENT_REDIRECT

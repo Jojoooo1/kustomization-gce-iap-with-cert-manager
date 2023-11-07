@@ -1,0 +1,31 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-iap-${ARGOCD_ENV_INGRESS_NAME}
+  namespace: ${ARGOCD_ENV_INGRESS_NAMESPACE}
+  annotations:
+    kubernetes.io/ingress.class: "gce"
+    cert-manager.io/cluster-issuer: letsencrypt-prod-gce
+
+    kubernetes.io/ingress.global-static-ip-name: ${ARGOCD_ENV_INGRESS_IP_NAME}
+    networking.gke.io/v1beta1.FrontendConfig: "frontend-config-${ARGOCD_ENV_INGRESS_NAME}"
+
+    external-dns.alpha.kubernetes.io/ingress-hostname-source: annotation-only # DO NOT REMOVE TO PREVENT UNWANTED BEHAVIOR
+    ${ARGOCD_ENV_EXTERNAL_DNS_ANNOTATION:=no-external-dns-managed: no-dns}
+
+spec:
+  tls:
+    - secretName: ${ARGOCD_ENV_INGRESS_NAME}-cert
+      hosts:
+        - ${ARGOCD_ENV_INGRESS_DNS}
+  rules:
+    - host: ${ARGOCD_ENV_INGRESS_DNS}
+      http:
+        paths:
+          - path: /*
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: ${ARGOCD_ENV_SERVICE_NAME}
+                port:
+                  number: ${ARGOCD_ENV_SERVICE_PORT}
