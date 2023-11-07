@@ -4,9 +4,9 @@ kind: Kustomization
 namespace: ${ARGOCD_ENV_INGRESS_NAMESPACE}
 
 resources:
-  - ingress.yaml
   - backend-config.yaml
-  - secret.yaml
-  - frontend-config.yaml
   - external-secret.yaml
+  - frontend-config.yaml
+  - ingress.yaml
+  - secret.yaml
   
