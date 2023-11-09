@@ -12,7 +12,8 @@ metadata:
     networking.gke.io/v1beta1.FrontendConfig: "frontend-config-${ARGOCD_ENV_INGRESS_NAME}"
 
     external-dns.alpha.kubernetes.io/ingress-hostname-source: annotation-only # DO NOT REMOVE TO PREVENT UNWANTED BEHAVIOR
-    ${ARGOCD_ENV_EXTERNAL_DNS_ANNOTATION:=no-external-dns-managed: no-dns}
+    external-dns.alpha.kubernetes.io/hostname: ${ARGOCD_ENV_INGRESS_DNS}
+    # ${ARGOCD_ENV_EXTERNAL_DNS_ANNOTATION:=no-external-dns-managed: no-dns}
 
 spec:
   tls:
