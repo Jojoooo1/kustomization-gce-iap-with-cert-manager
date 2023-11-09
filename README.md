@@ -38,4 +38,4 @@ metadata:
         cloud.google.com/backend-config: '{"default": "backend-config-my-ingress-name"}'
 ```
 
-You also need to have ExternalSecret operator installed and a ExternalSecret named `oauth-iap-creds-secrets` containing your iap creds.
+You also need to have ExternalSecret operator installed and a ExternalSecret named `oauth-internal-creds-secrets` containing your iap creds.
