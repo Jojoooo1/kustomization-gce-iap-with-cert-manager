@@ -1,4 +1,4 @@
-# Deploy IAP
+# Deploy GCE Ingress with IAP and cert-manager
 
 This repo provide a default structure to create a GCE Ingress with IAP directly from your ArgoCD Application.
 
